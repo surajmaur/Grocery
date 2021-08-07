@@ -1,0 +1,61 @@
+{% extends 'bag/main.html' %}
+
+
+{% block content %}
+
+<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="POST" action="">
+                     {% csrf_token %}
+
+						<div class="form-group">
+							<label for="username">User Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" name="username" class="form-control">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+                                  <input type="email" name="email" class="form-control">
+								</div>
+							</div>
+
+						</div>
+
+
+                       <div class="form-group">
+							<label for="password1" class="cols-sm-2 control-label">Password:</label>
+							<div class="cols-sm-10">
+								<div class="password-group">
+                                  <input type="password" name="password1" class="form-control">
+								</div>
+							</div>
+						</div>
+                        <div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Re-Password:</label>
+							<div class="cols-sm-10">
+								<div class="password-group">
+                                  <input type="password" name="password2" class="form-control">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="form-group ">
+							<button type="submit" class="btn btn-primary Register-button">Register</button>
+						</div>
+						<br>
+                        {{form.errors}}
+						<div class="login-register">
+  	                      <a class="btn btn-primary login-button" href="{% url 'login' %}">Login</a>
+  	                    </div>
+					</form>
+				</div>
+			</div>
+		</div>
+{% endblock %}

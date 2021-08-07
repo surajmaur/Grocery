@@ -1,0 +1,91 @@
+{% extends 'bag/main.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>View List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- top -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h1 style="color: white;">View Grocery List</h1>
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'add' %}">Create List</a>
+            </div>
+            <div class="col-lg-6 float-right">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <!-- Date Filtering-->
+                        <input type="date" class="form-control">
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <input type="submit" class="btn btn-danger" value="filter">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- // top -->
+        
+        <!-- Grocery Cards -->
+        <div class="row mt-4">
+            <!--- -->
+            <!-- Loop This -->
+            <div class="col-lg-4">
+            {% for Groce in groces %}
+            {% if Groce.item_status == "BOUGHT" %}
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ Groce.item_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ Groce.item_quantity}}</h6>
+                    <p class="text-success">{{Groce.item_status}}</p>
+                    <a class="btn-sm btn-info" href="{% url 'updategroce' Groce.id %}">Update</a>
+                    <a class="btn-sm btn-danger" href="{% url 'deletegroce' Groce.id %}">Delete</a>
+                </div>
+                </div>
+            {% endif %}
+            {% endfor %}    
+            </div>
+            <!-- // Loop -->
+            <div class="col-lg-4">
+                {% for Groce in groces %}
+                {% if Groce.item_status == "NOT AVAILABLE" %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ Groce.item_name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ Groce.item_quantity}}</h6>
+                            <p class="text-danger">{{Groce.item_status}}</p>
+                            <a class="btn-sm btn-info" href="{% url 'updategroce' Groce.id %}">Update</a>
+                            <a class="btn-sm btn-danger" href="{% url 'deletegroce' Groce.id %}">Delete</a>
+                        </div>
+                        </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-4">
+            {% for Groce in groces %}
+            {% if Groce.item_status == "PENDING" %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ Groce.item_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ Groce.item_quantity}}</h6>
+                    <p class="text-info">{{Groce.item_status}}</p>
+                    <a class="btn-sm btn-info" href="{% url 'updategroce' Groce.id %}">Update</a>
+                    <a class="btn-sm btn-danger" href="{% url 'deletegroce' Groce.id %}">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
